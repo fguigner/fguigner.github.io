@@ -1,6 +1,6 @@
 /* || General setup */
 
-@media (min-width: 576px) {
+@media (min-width: 375px) {
   html, body {
     margin: 0;
     padding: 0;
