@@ -58,7 +58,7 @@
 
   nav {
     height: 50px;
-    background-color: #8dff80;
+    background-color: #ffd580;
     display: flex;
     margin-bottom: 10px;
   }
@@ -122,7 +122,7 @@
   aside {
     display: block;
     margin-top: 1em;
-    background-color: #80fff4;
+    background-color: #ffd580;
   }
 
   aside li {
