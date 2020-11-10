@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Compteur</title>
+
+</head>
+<body onload="init()">
+
+<p id="compteur">10</p>
+
+</body>
+
+<script>
+    let compteur = null;
+    let interval = null;
+
+    function init(){
+        compteur = document.getElementById("compteur");
+        interval = setInterval(decompte, 1000);
+    }
+
+    function decompte(){
+        if(compteur.innerText !== "0"){
+            compteur.innerText = compteur.innerText - 1;
+        } else {
+            clearInterval(interval);
+        }
+    }
+</script>
+</html>
+
