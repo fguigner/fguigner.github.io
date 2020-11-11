@@ -7,7 +7,7 @@
 
 
 <body onload="init()">
-<canvas id="myCanvas" width="500" height="200"/>
+<canvas id="myCanvas" width="500" height="200" style="border: solid black 1pt"/>
 
 </body>
 
@@ -18,13 +18,17 @@
     function init(){
        context.fillStyle = 'red';
        context.fillRect(x, 10, 100, 100);
-        interval2 = setInterval(dessiner, 100);
+        interval = setInterval(dessiner, 100);
     }
 
     function dessiner(){
-        if(x<400){
+        if(x<500){
             context.clearRect(x,10,100,100);
             x+=10;
+            context.fillRect(x,10,100,100);
+        } else if(x>=500){
+            context.clearRect(x,10,100,100);
+            x = -100;
             context.fillRect(x,10,100,100);
         }else{
             clearInterval(interval);
