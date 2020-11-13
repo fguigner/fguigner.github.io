@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TP3</title>
+</head>
+
+
+<body>
+<canvas id="myCanvas" width="500" height="200"/>
+
+</body>
+
+<script>
+    window.addEventListener('load', (event) => {
+
+        const mycanvas = document.getElementById("myCanvas");
+        let context = mycanvas.getContext("2d");
+
+        let interval1 = setInterval(init_canvas, 1000);
+
+        let x = 10;
+        let x2 = 10;
+        let x3 = 10;
+
+        function init_canvas() {
+            clearInterval(interval1);
+            context.fillStyle = 'red';
+            context.fillRect(x, 10, 100, 100);
+            context.fillRect(x2, 10, 100, 100);
+            context.fillRect(x3, 10, 100, 100);
+            let interval = setInterval(dessiner1, 100);
+            let interval2 = setInterval(dessiner2, 200);
+            let interval3 = setInterval(dessiner3, 300);
+        }
+
+        function dessiner1() {
+            if (x < 400) {
+                context.clearRect(x, 10, 100, 100);
+                x += 10;
+                context.fillRect(x, 10, 100, 100);
+            } else {
+                clearInterval(interval);
+            }
+        }
+
+        function dessiner2() {
+            if (x2 < 400) {
+                context.clearRect(x2, 10, 100, 100);
+                x2 += 10;
+                context.fillRect(x2, 10, 100, 100);
+            } else {
+                clearInterval(interval2);
+            }
+        }
+
+        function dessiner3() {
+            if (x3 < 400) {
+                context.clearRect(x3, 10, 100, 100);
+                x3 += 10;
+                context.fillRect(x3, 10, 100, 100);
+            } else {
+                clearInterval(interval3);
+            }
+        }
+    });
+
+
+</script>
+
+</html>
