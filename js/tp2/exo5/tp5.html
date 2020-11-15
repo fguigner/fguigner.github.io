@@ -2,36 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TP3</title>
+    <title>Exo5</title>
 </head>
 
 
 <body>
 <canvas id="myCanvas" width="500" height="2000"/>
 
+
 </body>
 
-<SCRIPT LANGUAGE="Javascript" SRC="carre.js"></SCRIPT>
+<SCRIPT LANGUAGE="Javascript" SRC="./carre.js"></SCRIPT>
 
 <script>
-
     //Initialisation des variables
     const mycanvas = document.getElementById("myCanvas");
     let context = mycanvas.getContext("2d");
     context.fillStyle = 'red';
-    let x = 10;
-    let y = 10;
-    let w = 100;
-    let h = 100;
+
     let squares = [];
     let interval;
-    let list_interval=[];
+    //let list_interval=[];
     let timer;
 
     window.addEventListener('load', (event) => {
 
 
-        interval = setInterval(init_canvas, 4000);
+        interval = setInterval(init_canvas, 1000);
 
 
         function init_canvas() {
@@ -41,6 +38,23 @@
             intervalles_carres();
         }
 
+
+
+        //Création des carrés + nb de carre
+        function creation_carre(){
+            let y = 0;
+            for (i=0; i<10; i++){
+                console.log("creation_carre :: ",i);
+                squares[i] = new Carre(i, 10, y + 10, 100, 100);
+                squares[i].dessiner();
+                y+=110;
+
+            }
+        }
+
+
+
+        //Lance l'animation des carrés
         function intervalles_carres(){
             console.log("intervalle_carre ::");
             let ecart_lancement =1;
@@ -54,42 +68,8 @@
         function timer_carre(i){
             let indice = i;
             console.log("timer_carre :: appel pour carre ",indice);
-            list_interval[i] = setInterval(dessiner, 100, indice);
+            squares[indice].interval = setInterval(squares[i].animer, 100, squares[indice]);
         }
-
-
-
-        function creation_carre(){
-            for (i=0; i<3; i++){
-                context.fillRect(x,y,w,h);
-                squares[i] = {x: x,
-                    y: y};
-                y += 110;
-            }
-        }
-
-
-        function dessiner(indice) {
-            console.log("dessiner :: appel pour carre ", indice);
-            let xo = squares[indice].x;
-            let yo = squares[indice].y;
-
-            if (xo < 400) {
-                context.clearRect(xo, yo, 100, 100);
-                squares[indice].x += 10;
-                xo +=10;
-                context.fillRect(xo, yo, 100, 100);
-            } else {
-                clearInterval(list_interval[indice]);
-            }
-        }
-
-
-
-
-
-
-
     });
 
 
