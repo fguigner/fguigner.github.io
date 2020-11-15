@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TP3</title>
+</head>
+
+
+<body>
+<canvas id="myCanvas" width="500" height="200"/>
+
+</body>
+
+<SCRIPT LANGUAGE="Javascript" SRC="carre.js"></SCRIPT>
+
+
+<script>
+    //initialisation variables
+    let interval;
+    const mycanvas = document.getElementById("myCanvas");
+    let context = mycanvas.getContext("2d");
+
+    window.addEventListener('load', (event) => {
+
+
+        interval = setInterval(init_canvas, 2000);
+
+        function init_canvas() {
+            clearInterval(interval);
+            let carre1 = new Carre(10,10,100,100);
+            console.log(carre1);
+            //Dessine le carre
+            carre1.dessiner();
+            //carre1.dessiner();
+            //Anime le carre
+            //interval = setInterval(carre1.animer, 100, carre1);
+            carre1.interval = setInterval(carre1.animer, 100, carre1);
+        }
+
+
+    });
+
+
+</script>
+
+</html>
