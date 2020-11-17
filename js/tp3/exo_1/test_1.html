@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test_1</title>
+</head>
+
+<body>
+<canvas id="myCanvas" width="500" height="2000"/>
+
+
+</body>
+
+<SCRIPT LANGUAGE="Javascript" SRC="./carre.js"></SCRIPT>
+
+<script>
+    //Initialisation des variables
+    const mycanvas = document.getElementById("myCanvas");
+    let context = mycanvas.getContext("2d");
+    context.fillStyle = 'red';
+
+    let squares = [];
+    let interval;
+    //let list_interval=[];
+    let timer;
+
+    window.addEventListener('load', (event) => {
+
+
+        interval = setInterval(init_canvas, 1000);
+
+
+        function init_canvas() {
+            clearInterval(interval);
+            creation_carre();
+            //interval = setInterval(intervalle_carre, 1000);
+            intervalles_carres();
+        }
+
+
+
+        //Création des carrés + nb de carre
+        function creation_carre(){
+            let y = 0;
+            for (i=0; i<1; i++){
+                console.log("creation_carre :: ",i);
+                squares[i] = new Carre(400, y + 10, 100, 100);
+                squares[i].dessiner();
+                //y+=110;
+
+            }
+        }
+
+
+
+        //Lance l'animation des carrés
+        function intervalles_carres(){
+            console.log("intervalle_carre ::");
+            let ecart_lancement =1;
+            for(i=0; i<squares.length; i++){
+                timer = setTimeout(timer_carre, ecart_lancement*1000, i);
+                ecart_lancement+=1;
+            }
+            console.log("intervalle_carre :: END")
+        }
+
+        function timer_carre(i){
+            let indice = i;
+            console.log("timer_carre :: appel pour carre ",indice);
+            squares[indice].interval = setInterval(squares[i].animer, 100, squares[indice]);
+        }
+
+
+    });
+
+
+</script>
+
+</html>
