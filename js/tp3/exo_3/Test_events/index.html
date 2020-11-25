@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<canvas id="myCanvas" width="500" height="500" style="border-style: solid; border-width: 2px"/>
+<canvas id="myCanvas" width="1000" height="1000" style="border-style: solid; border-width: 2px"/>
 
 </body>
 <script>
@@ -20,21 +20,26 @@
                 // Do something for "down arrow" key press.
                 //alert("ArrowDown");
                 monBonhomme.direction = 2;
+                updateGame();
                 monBonhomme.down();
+
                 break;
             case "ArrowUp":
                 // Do something for "up arrow" key press.
                 monBonhomme.direction = 3;
+                updateGame();
                 monBonhomme.up();
                 break;
             case "ArrowLeft":
                 // Do something for "left arrow" key press.
                 monBonhomme.direction = 0;
+                updateGame();
                 monBonhomme.left();
                 break;
             case "ArrowRight":
                 // Do something for "right arrow" key press.
                 monBonhomme.direction = 1;
+                updateGame();
                 monBonhomme.right();
                 break;
             case "Enter":
@@ -113,9 +118,10 @@
             this.ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         }
 
+        //Lit les sprites / enchaine l'animation
         update() {
             this.cptFrame++;
-            if (this.cptFrame > 10) {
+            if (this.cptFrame > 2) {
                 this.cptFrame = 0;
                 this.cpt++;
                 if (this.cpt > 3) {
@@ -147,7 +153,7 @@
 
     let mainloop = function () {
         clearGame();
-        updateGame();
+        //updateGame();
         drawGame();
     };
 
@@ -158,6 +164,7 @@
         window.msRequestAnimationFrame ||
         null;
 
+    //Creer la boucle de jeu / infinie
     let recursiveAnim = function () {
         mainloop();
         animFrame(recursiveAnim);
