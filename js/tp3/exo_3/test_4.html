@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test_2</title>
+</head>
+
+<body>
+<div id="elementAnimer" style="background-color: darkred; width: 200px; height: 200px; right: 0px; position: absolute"/>
+
+
+</body>
+
+<script>
+    //Initialisation des variables
+    //const mycanvas = document.getElementById("myCanvas");
+    //let context = mycanvas.getContext("2d");
+    //context.fillStyle = 'red';
+
+    //let list_interval=[];
+
+    window.addEventListener('load', (event) => {
+
+
+        let elem = document.getElementById("elementAnimer");
+        let right = 0;
+        let timer;
+        timer = requestAnimationFrame(deplacement);
+        // Move the element 10px on the right every 16ms
+        /*let date = new Date();
+        let date1 = new Date();
+        timer = setInterval(function() {
+            //pausecomp(date1-date);
+            elem.style.right = ( right += 10 ) + "px";
+            // clear the timer at 400px to stop the animation
+            if ( right > 500 ) {
+                clearInterval( timer );
+            }
+        }, 16);*/
+
+        function deplacement(){
+            elem.style.right = ( right += 10 ) + "px";
+            if ( right > 500 ) {
+                cancelAnimationFrame();
+            }
+            requestAnimationFrame(deplacement);
+        }
+
+
+
+
+    });
+
+
+</script>
+
+</html>

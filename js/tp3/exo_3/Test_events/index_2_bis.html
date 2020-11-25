@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Events 1 - Touches</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="500" height="500" style="border-style: solid; border-width: 2px"/>
+
+</body>
+<script>
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+            return; // Should do nothing if the key event was already consumed.
+        }
+
+        switch (event.key) {
+            case "ArrowDown":
+                // Do something for "down arrow" key press.
+                //alert("ArrowDown");
+                monBonhomme.direction = 2;
+                if (y >= 0 && y < 372) {
+                    y += 7;
+                }
+                break;
+            case "ArrowUp":
+                // Do something for "up arrow" key press.
+                monBonhomme.direction = 3;
+                if (y > 0) {
+                    y -= 7;
+                }
+                break;
+            case "ArrowLeft":
+                // Do something for "left arrow" key press.
+                monBonhomme.direction = 0;
+                if (x > 0) {
+                    x -= 7;
+                }
+                break;
+            case "ArrowRight":
+                // Do something for "right arrow" key press.
+                monBonhomme.direction = 1;
+                if (x < 372) {
+                    x += 7;
+                }
+                break;
+            case "Enter":
+                // Do something for "enter" or "return" key press.
+                break;
+            case "Escape":
+                // Do something for "esc" key press.
+                break;
+            default:
+                return; // Quit when this doesn't handle the key event.
+        }
+
+        // Consume the event for suppressing "double action".
+        event.preventDefault();
+    }, true);
+
+
+    let theCanvas = document.getElementById("myCanvas");
+    let ctx = theCanvas.getContext('2d');
+    //ctx.canvas.width  = window.innerWidth;
+    //ctx.canvas.height = window.innerHeight;
+
+    var x = 0;
+    var y = 0;
+
+    let monBonhomme;
+
+    let imgGlobal = new Image();
+    imgGlobal.src = "hero_walk_cycle_spritesheet_by_mrnoobtastic-d3defej.png";
+    imgGlobal.addEventListener('load', function () {
+        monBonhomme = new Bonhomme(ctx, imgGlobal);
+        // start the mainloop
+        animFrame(recursiveAnim);
+    });
+
+    let cpt = 0
+    let cptFrame = 0
+
+
+    class Bonhomme {
+        constructor(ctx, img) {
+            this.ctx = ctx;
+            this.img = img;
+            this.direction = 2; // 0: gauche, 1: droite, 2:bas, 3:haut
+            this.cptFrame = 0;
+            this.cpt = 0;
+        }
+
+        clear() {
+            this.ctx.clearRect(0, 0, 500, 500);
+        }
+
+        update() {
+            this.cptFrame++;
+            if (this.cptFrame > 10) {
+                this.cptFrame = 0;
+                this.cpt++;
+                if (this.cpt > 3) {
+                    this.cpt = 0;
+                }
+            }
+        }
+
+        draw() {
+            this.ctx.drawImage(this.img, 128 * this.cpt, 128 * this.direction, 128, 128, x, y, 128, 128);
+            //this.ctx.drawImage(imgGlobal, 0, 0, 128,128,20,20,128,128);
+        }
+    }
+
+
+    function clearGame() {
+        monBonhomme.clear();
+    }
+
+
+    function updateGame() {
+        monBonhomme.update();
+    }
+
+    function drawGame() {
+        monBonhomme.draw();
+    }
+
+
+    let mainloop = function () {
+        clearGame();
+        updateGame();
+        drawGame();
+    };
+
+    let animFrame = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        null;
+
+    let recursiveAnim = function () {
+        mainloop();
+        animFrame(recursiveAnim);
+    };
+
+</script>

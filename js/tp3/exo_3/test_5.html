@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test_5</title>
+</head>
+
+<body>
+
+<canvas id="myCanvas" width="500" height="200"/>
+
+</body>
+
+<script>
+    //Definition et initialisation des variables
+    const mycanvas = document.getElementById("myCanvas");
+    let context = mycanvas.getContext("2d");
+    let img = new Image();
+    let i =0;
+    img.src="coin-sprite-animation-sprite-sheet.png";
+
+    function updateGame() {
+        i = (i+1) % 10;
+        //console.log("indice du sprites :: ", i);
+    }
+
+    function drawGame(indice){
+            //context.drawImage(img, 0,0);
+            context.clearRect(0,0, mycanvas.clientWidth, mycanvas.clientHeight);
+            context.drawImage(img, 44*indice, 0, 44, 40, 0, 0, 44, 40);
+
+
+    }
+
+    let mainloop = function() {
+        updateGame();
+        console.log("indice de la sprites :: ", i);
+        drawGame(i);
+    };
+
+    let animFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame
+        || window.oRequestAnimationFrame || window.msRequestAnimationFrame  || null ;
+
+    let recursiveAnim = function() {
+        mainloop();
+        animFrame(recursiveAnim);
+    };
+
+
+
+    // start the mainloop
+    animFrame(recursiveAnim);
+
+
+</script>
+
+</html>
