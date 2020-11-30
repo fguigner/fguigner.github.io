@@ -1,24 +1,18 @@
+//Executer au moment de l'initialisation du Worker
 this.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open('v1').then(function(cache) {
             return cache.addAll([
-                '/service_workers/',
-                '/service_workers/index.html',
-                '/service_workers/style.css',
-                '/service_workers/app.js',
-                '/service_workers/image-list.js',
-                '/service_workers/star-wars-logo.jpg',
-                '/service_workers/gallery/',
-                '/service_workers/gallery/bountyHunters.jpg',
-                '/service_workers/gallery/myLittleVader.jpg',
-                '/service_workers/gallery/snowTroopers.jpg'
+                'index_SW.html',
+                '../../style.css'
             ]);
         })
     );
 });
 
+
 this.addEventListener('fetch', function(event) {
-    var response;
+    let response;
     event.respondWith(caches.match(event.request).catch(function() {
         return fetch(event.request);
     }).then(function(r) {
